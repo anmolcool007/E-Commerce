@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// importing routes
+const userRoutes = require('./routes/user');
+
+
 // app
 const app = express();
 
@@ -12,10 +16,9 @@ mongoose.connect(process.env.DATABASE, {
     useUnifiedTopology: true
 }).then(() => console.log("Database connected"));
 
-// routes
-app.get('/', (req, res) => {
-    res.send('try');
-});
+// routes middleware
+app.use("/api", userRoutes);
+
 
 const port = process.env.PORT || 8000;
 
