@@ -46,6 +46,14 @@ userSchema.virtual('password')
 });
 
 userSchema.methods = {
+    
+    //authenticate user for signin
+    authenticate: function(entered_password) {
+        // from signin in controllers/user.js
+        //will return true if hashed version of enterd password matches hashed password 
+        return this.encryptPassword(entered_password) === this.hashed_password;
+    },
+
     encryptPassword: function(password){
         if(!password) return '';
         try{
